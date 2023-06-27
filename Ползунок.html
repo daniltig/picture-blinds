@@ -1,0 +1,175 @@
+<html>
+	<head>
+		<title>Ползунок</title>
+		<style>
+			*{
+				--heightDiv1: 200px;
+				--widthDiv1: 300px;
+				--widthDiv2: 4px;
+			}
+			#div1{
+				position: absolute;
+				left: 100px;
+
+				width: var(--widthDiv1);
+				height: var(--heightDiv1);
+				border: 1px solid yellow;
+				//border-radius: 45%;
+				overflow: hidden;
+			}
+			#div2{
+				position: absolute;
+
+				height: var(--heightDiv1);
+				width: var(--widthDiv2);
+				z-index: 3;
+
+				display: flex;
+				flex-direction:column;
+				justify-content: center;
+				align-items: center;
+			}
+			#div3{
+				position:absolute;
+				top:0px;
+				left: 0px;
+
+				width:calc(var(--widthDiv2) / 2);
+				height:var(--heightDiv1);
+				//border: 1px solid red;
+				overflow: hidden;
+				z-index: 2;
+			}
+			#div3 img{
+				height:100%;
+				width:auto;
+			}
+			#div4{
+				position:absolute;
+				top:0px;
+				right: 0px;
+
+				width:auto;
+				height:var(--heightDiv1);
+				//border: 1px solid red;
+				overflow: hidden;
+				z-index: 1;
+			}
+			#div4 img{
+				float: right;
+				height:100%;
+				width:auto;
+				right: 0px;
+			}
+
+			.polzunok{
+				--diameter: 30px;
+
+				border: 2px solid white;
+				border-radius:50%;
+				width: var(--diameter);
+				height: var(--diameter);
+				z-index:3;
+
+				display: flex;
+				flex-duration: row;
+				justify-content: space-between;
+				align-items: center;
+			}
+			.polzunokTop{
+				background:red;
+				width: 100%;
+				height: calc(50% - 15px);
+			}
+
+			.polzunokBottom{
+				background:blue;
+				width: 100%;
+				height: calc(50% - 15px);
+			}
+
+			.triangleLeft{
+				border: 5px solid transparent;
+				border-right: 5px solid white;
+			}
+
+			.triangleRight{
+				border: 5px solid transparent;
+				border-left: 5px solid white;
+			}
+		</style>
+
+	</head>
+	<body>
+		<div id="div1">
+				<div id="div2">
+					<div class="polzunokTop"></div>
+					<div class="polzunok">
+						<div class="triangleLeft"></div>
+
+						<div class="triangleRight"></div>
+					</div>
+					<div class="polzunokBottom"></div>
+				</div>
+
+
+				<div id="div3">
+					<img src="лес.jpg" id="img1">
+				</div>
+
+				<div id="div4">
+					<img src="лес2.jpg" id="img2">
+				</div>
+		</div>
+
+		<script>
+			let el = document.getElementById("div2");
+			let elParent = document.getElementById("div1");
+			let kursOnEl = 0;
+
+			let handlerMove = function(event)
+			{
+				event.preventDefault();
+
+				let posX = event.clientX-elParent.offsetLeft- kursOnEl;
+				if (posX<0)
+					el.style.left = 0;
+				else if (posX>elParent.offsetWidth-el.offsetWidth-2)
+					el.style.left = elParent.offsetWidth - el.offsetWidth-2;
+				else
+				{
+					el.style.left = posX;
+				}
+
+				let img1 = document.getElementById("div3");
+				//let img2 = document.getElementById("div4");
+				img1.style.width = parseInt(el.style.left) + el.offsetWidth/2 + "px";
+			}
+
+			let handlerUp = function(event)
+			{
+				document.removeEventListener( "mousemove" , handlerMove, false);
+
+				console.log("MouseUp");
+			}
+
+			let handlerDown = function(event)
+			{
+				event.preventDefault();
+
+				document.addEventListener( "mousemove" , handlerMove, false);
+				document.addEventListener( "mouseup" , handlerUp, false);
+
+
+				kursOnEl = event.clientX-elParent.offsetLeft - el.offsetLeft;
+
+				console.log("MouseDown");
+			}
+
+
+
+			el.addEventListener( "mousedown" , handlerDown, false);
+
+		</script>
+	</body>
+<html>
