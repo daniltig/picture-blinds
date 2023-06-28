@@ -1,0 +1,95 @@
+*{
+   --heightDiv1: 200px;
+   --widthDiv1: 300px;
+   --widthDiv2: 4px;
+}
+#div1{
+   position: absolute;
+   left: 100px;
+
+   width: var(--widthDiv1);
+   height: var(--heightDiv1);
+   border: 1px solid yellow;
+   //border-radius: 45%;
+   overflow: hidden;
+}
+#div2{
+   position: absolute;
+
+   height: var(--heightDiv1);
+   width: var(--widthDiv2);
+   z-index: 3;
+
+   display: flex;
+   flex-direction:column;
+   justify-content: center;
+   align-items: center;
+}
+#div3{
+   position:absolute;
+   top:0px;
+   left: 0px;
+
+   width:calc(var(--widthDiv2) / 2);
+   height:var(--heightDiv1);
+   //border: 1px solid red;
+   overflow: hidden;
+   z-index: 2;
+}
+#div3 img{
+   height:100%;
+   width:auto;
+}
+#div4{
+   position:absolute;
+   top:0px;
+   right: 0px;
+
+   width:auto;
+   height:var(--heightDiv1);
+   //border: 1px solid red;
+   overflow: hidden;
+   z-index: 1;
+}
+#div4 img{
+   float: right;
+   height:100%;
+   width:auto;
+   right: 0px;
+}
+
+.polzunok{
+   --diameter: 30px;
+
+   border: 2px solid white;
+   border-radius:50%;
+   width: var(--diameter);
+   height: var(--diameter);
+   z-index:3;
+
+   display: flex;
+   flex-duration: row;
+   justify-content: space-between;
+   align-items: center;
+}
+.polzunokTop{
+   background:red;
+   width: 100%;
+   height: calc(50% - 15px);
+}
+
+.polzunokBottom{
+   background:blue;
+   width: 100%;
+   height: calc(50% - 15px);
+}
+
+.triangleLeft{
+   border: 5px solid transparent;
+   border-right: 5px solid white;
+}
+
+.triangleRight{
+   border: 5px solid transparent;
+   border-left: 5px solid white;
+}
